@@ -24,7 +24,7 @@ namespace todoapp.backend
                 {
                     todoRepo.AddNew(new TodoItem { Id = Guid.NewGuid().ToString(), Completed = false, Title = "Let's learn docker and kuberenetes!", Order = 3 });
                     todoRepo.AddNew(new TodoItem { Id = Guid.NewGuid().ToString(), Completed = true, Title = "Check the new DotNet5!", Order = 1 });
-                    todoRepo.AddNew(new TodoItem { Id = Guid.NewGuid().ToString(), Completed = false, Title = "Learn another No-Sql database - Couchbase!", Order=2 });
+                    todoRepo.AddNew(new TodoItem { Id = Guid.NewGuid().ToString(), Completed = false, Title = "Learn another No-Sql database - Couchbase!", Order = 2 });
                 }
 
             }
@@ -62,7 +62,9 @@ namespace todoapp.backend
             services.AddCouchbase(x =>
             {
                 // Change it to http://localhost:8091 to run locally
-                x.Servers = new List<Uri> { new Uri("http://localhost:8091") };
+                var DB_SERVER = Environment.GetEnvironmentVariable("DB_SERVER");
+                Console.WriteLine("DB SERVER is - " + DB_SERVER);
+                x.Servers = new List<Uri> { new Uri($"http://{DB_SERVER}:8091") };
                 x.Username = "Administrator";
                 x.Password = "password";
             });
@@ -80,7 +82,8 @@ namespace todoapp.backend
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo App V1");
             });
             app.UseRouting();

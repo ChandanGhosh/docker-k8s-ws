@@ -8,15 +8,16 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment: 
+      DB_SERVER: couchbase
     ports:
       - 80:80
     depends_on:
       - couchbase
+    restart: on-failure #unless-stopped
 
   couchbase:
-    image: couchbase
-    environment:
-      
+    image: chandanghosh/couchbase-configured
     ports:
       - 8091-8094:8091-8094
       - 11210:11210

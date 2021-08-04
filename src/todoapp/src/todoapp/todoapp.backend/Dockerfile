@@ -3,6 +3,7 @@ WORKDIR /app
 EXPOSE 80
 
 ENV ASPNETCORE_URLS=http://+:80
+ENV DB_SERVER=localhost
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
