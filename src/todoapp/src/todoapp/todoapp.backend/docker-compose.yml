@@ -1,13 +1,8 @@
-# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
-
 version: '3.4'
 
 services:
   todoappbackend:
-    image: todoappbackend
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: chandanghosh/todobackend-couchbase:net5
     environment: 
       DB_SERVER: couchbase
     ports:
@@ -17,7 +12,11 @@ services:
     restart: on-failure #unless-stopped
 
   couchbase:
-    image: chandanghosh/couchbase-configured
+    image: chandanghosh/couchbase-configured:latest
+    environment: 
+      USERNAME: Administrator
+      PASSWORD: password
+      BUCKET: todo
     ports:
       - 8091-8094:8091-8094
       - 11210:11210

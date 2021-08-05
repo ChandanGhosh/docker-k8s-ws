@@ -8,12 +8,31 @@ A small docker-k8s-workshop
 - Valid Azure Subscription to deploy in Azure kubernetes service
 
 # Setup couchbase
- - docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase
- - Provide a meaniniful name to the cluster
- - Use Administrator as username and password as password to setup the cluster. Should you prefer a different username or password, maker sure to pass the same as env variables to the container of todo backend or update the docker-compose file accordingly.
+ 
+ ```sh
+ docker run -d --name db -p 8091-8094:8091-8094 -p 11210:11210 couchbase-configured:latest
+ ```
+ Use Administrator as username and password as password to setup the cluster. Should you prefer a different username or password, maker sure to pass the same as env variables to the container of todo backend or update the docker-compose file accordingly. For example,
+```sh
+ docker run -it -d --name db \                                                                        130 ↵
+  -e USERNAME=Administrator \     
+  -e PASSWORD=password \
+  -e BUCKET=todo \                 
+  -p 8091-8094:8091-8094 \
+  -p 11210:11210 \
+  chandanghosh/couchbase-configured
+ ```
 
  - Run todo backend by using the below command.
+ ```sh
+    docker run --rm -d --name todo-backend chandanghosh/todobackend-couchbase:net5
  ```
-    docker run --rm -d --name todo-backend -e username=<username> -e password=<password> chandanghosh/todo-backend:v1
- ```
+
+# Docker compose
+Use the docke-compose to run multiple container automatically.
+
+```sh
+docker-compose up
+```
+
 

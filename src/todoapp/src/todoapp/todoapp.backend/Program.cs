@@ -63,7 +63,12 @@ namespace todoapp.backend
             {
                 // Change it to http://localhost:8091 to run locally
                 var DB_SERVER = Environment.GetEnvironmentVariable("DB_SERVER");
-                Console.WriteLine("DB SERVER is - " + DB_SERVER);
+                if (String.IsNullOrWhiteSpace(DB_SERVER))
+                {
+                    DB_SERVER = "localhost";
+                }
+
+                Console.WriteLine($"**************** DB SERVER is - {DB_SERVER} *******************");
                 x.Servers = new List<Uri> { new Uri($"http://{DB_SERVER}:8091") };
                 x.Username = "Administrator";
                 x.Password = "password";
