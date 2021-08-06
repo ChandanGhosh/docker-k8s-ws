@@ -49,12 +49,14 @@ Use the docker-desktop for deploying the services locally first to check if they
 
 Check the todo-service and how service type load balancer exposes public IP to localhost to access the website locally with http://localhost . To play with todo service, use the http://localhost/swagger endpoint. This helps without having a front-end ready when developing the backend part.
 
-![swagger-ui](swagger.png "Swagger")
+![swagger-ui](https://github.com/ChandanGhosh/docker-k8s-ws/raw/2-k8s/swagger.PNG "Swagger")
+&nbsp;
 
 Use the below command to inspect the couchbase server and open http://localhost:8091 . Username and password are Administrator/password
 
 ```sh
   kubectl port-forward deploy/couchbase-service 8091:8091
 ```
-![couchbase-documents](couchbase.png "Couchbase dashboard")
+![couchbase-documents](https://github.com/ChandanGhosh/docker-k8s-ws/raw/2-k8s/couchbase.PNG "Couchbase dashboard")
+&nbsp;
 
