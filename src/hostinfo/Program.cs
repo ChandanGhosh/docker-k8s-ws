@@ -30,6 +30,7 @@ namespace hostinfo
                 endpoints.MapGet("/", async ctx =>
                 {
                     await ctx.Response.WriteAsync(
+                        $"  ********** Version: V1 **********{Environment.NewLine}" +
                         $"  Framework - {System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}{Environment.NewLine}" +
                         $"  OS - {System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier}{Environment.NewLine}" +
                         $"  Kernel - {System.Runtime.InteropServices.RuntimeInformation.OSDescription}{Environment.NewLine}" +

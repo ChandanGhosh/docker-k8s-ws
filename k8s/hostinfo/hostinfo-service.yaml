@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostinfo-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostinfo-service
+  template:
+    metadata:
+      labels:
+        app: hostinfo-service
+    spec:
+      containers:
+      - name: hostinfo-service
+        image: chandanghosh/netcorehostinfo:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostinfo-service
+spec:
+  selector:
+    app: hostinfo-service
+  ports:
+  - port: 8080
+    targetPort: 80
+  type: LoadBalancer
